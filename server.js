@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 app.use("/projects", projectRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7777;
 app.listen(PORT, () => {
-  console.log(`Server is running`);
+  console.log(`Server is running on port ${PORT}`);
 });

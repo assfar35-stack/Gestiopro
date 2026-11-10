@@ -17,12 +17,12 @@ let projects = [
 ];
 
 router.get("/", (req, res) => {
-  const { termine } = req.query;
-  let result = projects;
-  if (termine !== undefined) {
-    result = projects.filter((p) => p.termine === (termine === "true"));
-  }
-  res.status(200).json(result);
+    const { termine } = req.query;
+    let result = projects;
+    if (termine !== undefined) {
+        result = projects.filter((p) => p.termine === (termine === "true"));
+    }
+    res.json(result);
 });
 
 // Create a new project 
