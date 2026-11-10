@@ -1,6 +1,6 @@
 import { Router } from "express";
 
-const router = express.Router();
+const router = Router();
 
 let projects = [
   {
@@ -17,12 +17,12 @@ let projects = [
 ];
 
 router.get("/", (req, res) => {
-  res.json({ message: "GestoPro  V1" });
-});
-
-// Get all projects
-router.get("/projects", (req, res) => {
-  res.status(200).json(projects);
+  const { termine } = req.query;
+  let result = projects;
+  if (termine !== undefined) {
+    result = projects.filter((p) => p.termine === (termine === "true"));
+  }
+  res.status(200).json(result);
 });
 
 // Create a new project 
