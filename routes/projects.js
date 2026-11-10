@@ -40,4 +40,26 @@ router.post("/", (req, res) => {
   res.status(201).json(projects);
 });
 
+// Get a specific project by ID
+router.get("/:id", (req, res) => {
+  const { id } = req.params;
+  const project = projects.find((p) => p.id === Number(id));
+  if (!project) {
+    return res.status(404).json({ message: "Project not found" });
+  }
+  res.json(project);
+});
+
+// Delete a project by ID
+router.delete("/:id", (req, res) => {
+    const { id } = req.params;
+    const projectIndex = projects.findIndex((p) => p.id === Number(id));
+    if (projectIndex === -1) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+    projects.splice(projectIndex, 1);
+    res.status(200).json({ message: "Project deleted" });
+});
+
+
 export default router;
