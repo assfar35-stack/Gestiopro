@@ -1,8 +1,10 @@
 import express from "express";
 import "dotenv/config";
+import projectRoutes from "./routes/projects.js";
 
 const app = express();
 app.use(express.json());
+app.use("/projects", projectRoutes);
 
 let projects = [
   {
@@ -20,26 +22,6 @@ let projects = [
 
 app.get("/", (req, res) => {
   res.json({ message: "GestoPro  V1" });
-});
-
-// Get all projects
-app.get("/projects", (req, res) => {
-  res.status(200).json(projects);
-});
-
-// Create a new project
-app.post("/projects", (req, res) => {
-  const { name} = req.body;
-    if (!name) {
-    return res.status(400).json({ message: "invalid data" });
-  }
-  const newProject = {
-    id: projects.length + 1,
-    name,
-    determine: false,
-  };
-  projects.push(newProject);
-  res.status(201).json(projects);
 });
 
 // Get a specific project by ID
